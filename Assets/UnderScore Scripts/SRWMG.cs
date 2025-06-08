@@ -8,15 +8,8 @@ using Random = UnityEngine.Random;
 
 public class SRWMG : ADG
 {
-
     [SerializeField]
-    private int iterations = 10;
-    [SerializeField]
-    public int walkLength = 10;
-    [SerializeField]
-    public bool startRandomlyEachIteration = true; //기본값 true
-                                                   //기본적으로 반복 횟수는 랜덤워크 알고리즘을 실행하려는 반복 횟수가 
-
+    private SRWD randomWalkParameters;
 
     protected override void RunProceduralGeneration()
     {
@@ -24,16 +17,17 @@ public class SRWMG : ADG
         tilemapVisualizer.Clear();
         tilemapVisualizer.PaintFloorTiles(floorPosiotions);
     }
+
     protected HashSet<Vector2Int> RunRandomWalk()
     {
-        //throw new NotImplementedException();
+        //throw new NotImplementedException();  
         var currentPosition = startPosition;
-        HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>(); 
-        for (int i = 0; i < iterations; i++)
+        HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
+        for (int i = 0; i < randomWalkParameters.iteration; i++) 
         {
-            var path = PGA.simpleRandomWalk(currentPosition, walkLength);
+            var path = PGA.simpleRandomWalk(currentPosition, randomWalkParameters.walkLength);
             floorPositions.UnionWith(path);
-            if (startRandomlyEachIteration)
+            if (randomWalkParameters.startRandomlyEachIteration)
                 currentPosition = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
         }
         return floorPositions;

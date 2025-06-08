@@ -6,10 +6,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
-public class SRWMG : MonoBehaviour
+public class SRWMG : ADG
 {
-    [SerializeField]
-    protected Vector2Int startPosition = Vector2Int.zero; //시작위치, 벡터와 같게 설정
 
     [SerializeField]
     private int iterations = 10;
@@ -20,13 +18,11 @@ public class SRWMG : MonoBehaviour
                                                    //기본적으로 반복 횟수는 랜덤워크 알고리즘을 실행하려는 반복 횟수가 
 
 
-    public void RunProceduralGeneration()
+    protected override void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPosiotions = RunRandomWalk();
-        foreach ( var position in floorPosiotions )
-        {
-            Debug.Log(position);
-        }
+        tilemapVisualizer.Clear();
+        tilemapVisualizer.PaintFloorTiles(floorPosiotions);
     }
     protected HashSet<Vector2Int> RunRandomWalk()
     {

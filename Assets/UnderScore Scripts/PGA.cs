@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PGA : MonoBehaviour
 {
-    public static HashSet<Vector2Int> simpleRandomWalk(Vector2Int startPositon, int walkLength)
+    public static HashSet<Vector2Int> SimpleRandomWalk(Vector2Int startPositon, int walkLength)
     {
         HashSet<Vector2Int> path = new HashSet<Vector2Int>();
 
@@ -22,7 +22,7 @@ public class PGA : MonoBehaviour
 
 public static class Direction2D
 {
-    public static List<Vector2Int> cardinalDirectionsList = new List<Vector2Int>()
+    public static List<Vector2Int> cardinalDirectionsList = new List<Vector2Int>
     {
         new Vector2Int(0, 1), //UP
         new Vector2Int(1, 0), //RIGHT

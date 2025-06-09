@@ -19,13 +19,12 @@ public class SRWMG : ADG
     }
 
     protected HashSet<Vector2Int> RunRandomWalk()
-    {
-        //throw new NotImplementedException();  
+    {  
         var currentPosition = startPosition;
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
         for (int i = 0; i < randomWalkParameters.iteration; i++) 
         {
-            var path = PGA.simpleRandomWalk(currentPosition, randomWalkParameters.walkLength);
+            var path = PGA.SimpleRandomWalk(currentPosition, randomWalkParameters.walkLength);
             floorPositions.UnionWith(path);
             if (randomWalkParameters.startRandomlyEachIteration)
                 currentPosition = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));

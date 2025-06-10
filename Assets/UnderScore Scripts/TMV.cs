@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,10 @@ using UnityEngine.Tilemaps;
 public class TMV : MonoBehaviour
 {
     [SerializeField]
-    private Tilemap floorTilemap;
+    private Tilemap floorTilemap, wallTilemap;
     [SerializeField]
-    private TileBase FloorTile;
+    private TileBase FloorTile, wallTop;
+
 
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
@@ -32,5 +34,11 @@ public class TMV : MonoBehaviour
     public void Clear()
     {
         floorTilemap.ClearAllTiles();
+        wallTilemap.ClearAllTiles();
+    }
+
+    internal void PaintSingleBasicWall(Vector2Int position)
+    {
+        PaintSingleTile(wallTilemap, wallTop, position);
     }
 }

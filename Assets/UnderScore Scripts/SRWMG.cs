@@ -16,6 +16,7 @@ public class SRWMG : ADG
         HashSet<Vector2Int> floorPosiotions = RunRandomWalk();
         tilemapVisualizer.Clear();
         tilemapVisualizer.PaintFloorTiles(floorPosiotions);
+        WG.CreateWalls(floorPosiotions, tilemapVisualizer);
     }
 
     protected HashSet<Vector2Int> RunRandomWalk()

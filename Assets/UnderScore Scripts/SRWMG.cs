@@ -13,21 +13,21 @@ public class SRWMG : ADG
 
     protected override void RunProceduralGeneration()
     {
-        HashSet<Vector2Int> floorPosiotions = RunRandomWalk();
+        HashSet<Vector2Int> floorPosiotions = RunRandomWalk(randomWalkParameters);
         tilemapVisualizer.Clear();
         tilemapVisualizer.PaintFloorTiles(floorPosiotions);
         WG.CreateWalls(floorPosiotions, tilemapVisualizer);
     }
 
-    protected HashSet<Vector2Int> RunRandomWalk()
+    protected HashSet<Vector2Int> RunRandomWalk(SRWD parameters)
     {  
         var currentPosition = startPosition;
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
-        for (int i = 0; i < randomWalkParameters.iteration; i++) 
+        for (int i = 0; i < parameters.iteration; i++) 
         {
-            var path = PGA.SimpleRandomWalk(currentPosition, randomWalkParameters.walkLength);
+            var path = PGA.SimpleRandomWalk(currentPosition, parameters.walkLength);
             floorPositions.UnionWith(path);
-            if (randomWalkParameters.startRandomlyEachIteration)
+            if (parameters.startRandomlyEachIteration)
                 currentPosition = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
         }
         return floorPositions;
